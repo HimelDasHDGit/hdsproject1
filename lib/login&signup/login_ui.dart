@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hdsproject1/login&signup/phone_login.dart';
 import 'package:hdsproject1/login&signup/phone_signup.dart';
 
+
 class LoginUi extends StatefulWidget {
   const LoginUi({Key? key}) : super(key: key);
 
@@ -26,7 +27,7 @@ class _LoginUiState extends State<LoginUi> {
                 ),
                 child: Image.asset('assets/images/loginimage.png'),
               ),
-              Positioned(
+              const Positioned(
                 bottom: 320,
                 left: 100,
                 child: Text(
@@ -42,16 +43,20 @@ class _LoginUiState extends State<LoginUi> {
                 bottom: 200,
                 left: 30,
                 child: Container(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
                   child: ElevatedButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.white,
                     ),
                     onPressed: ()async{
                       setState(() {_isloading=true;});
-                      await Future.delayed(Duration(seconds: 1));
+                      await Future.delayed(const Duration(seconds: 1));
                       setState(() {_isloading=false;});
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginPage()));
                     },
                     child: Center(
                       child: Padding(
@@ -60,7 +65,7 @@ class _LoginUiState extends State<LoginUi> {
                         Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               SizedBox(width: 50,),
                               Text("Loading..",style: TextStyle(color: Colors.green),),
                               SizedBox(width: 100,),
@@ -70,7 +75,7 @@ class _LoginUiState extends State<LoginUi> {
                             ],
                           ),
                         ):
-                        Text(
+                        const Text(
                           "Login with contact number",
                           style: TextStyle(
                             fontSize: 20,
@@ -80,13 +85,9 @@ class _LoginUiState extends State<LoginUi> {
                       ),
                     ),
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
                 ),
               ),
-              Positioned(
+              const Positioned(
                 bottom: 150,
                 left: 160,
                 child: Text(
@@ -103,9 +104,9 @@ class _LoginUiState extends State<LoginUi> {
                 left: 80,
                 child: GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>PhoneSignup()));
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>const PhoneSignup()));
                   },
-                  child: Text(
+                  child: const Text(
                     "Create account🌲",
                     style: TextStyle(
                       fontSize: 25,
@@ -117,7 +118,7 @@ class _LoginUiState extends State<LoginUi> {
               ),
             ],
         ),
-      ),
+    ),
     );
-  }
+}
 }
