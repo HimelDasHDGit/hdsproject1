@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hdsproject1/login&signup/phone_login.dart';
+import 'package:hdsproject1/home.dart';
 
 
 class LoginUi extends StatefulWidget {
@@ -55,7 +55,7 @@ class _LoginUiState extends State<LoginUi> {
                       setState(() {_isloading=true;});
                       await Future.delayed(const Duration(seconds: 1));
                       setState(() {_isloading=false;});
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>const LoginPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>const Home()));
                     },
                     child: Center(
                       child: Padding(
