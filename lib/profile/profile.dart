@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hdsproject1/home.dart';
@@ -16,20 +17,27 @@ class _ProfileState extends State<Profile> {
   // late File image;
 
   String profileImageUrl = '';
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final GlobalKey <FormState> _formKey = GlobalKey<FormState>();
+
 
 
 
   @override
   Widget build(BuildContext context) {
+    var uId= FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
       backgroundColor: Colors.green,
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             const SizedBox(height: 40,),
-            home_button(),
-            SizedBox(height: 5,),
-            personal_history(),//HomeIcon
+            const home_button(),
+            const SizedBox(height: 5,),
+            const personal_history(),//HomeIcon
             const SizedBox(height: 10,),
             Stack(
               children: [
@@ -139,81 +147,339 @@ class _ProfileState extends State<Profile> {
               ],
             ),
             const SizedBox(height: 50,),
-            Padding(
-              padding: const EdgeInsets.only(left: 50.0,right: 50),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
+            Card(
+              margin: const EdgeInsets.only(left: 10,right: 10),
+              color: Colors.green,
+              child: Column(
+                children: [
+                  Text(
+                      FirebaseAuth.instance.currentUser!.phoneNumber.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 20,
+                    ),
                   ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  hintText: 'Name',
-                  hintStyle: TextStyle(color: Colors.white),
-                ),
-                cursorColor: Colors.white,
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('user info').snapshots(),
+                      builder: (context, AsyncSnapshot<QuerySnapshot>snapshot){
+                     if (snapshot.hasData) {
+                       return SizedBox(
+                         height: 150,
+                         width: 250,
+                         child: ListView.builder(
+                           itemCount: snapshot.data!.docs.length,
+                           itemBuilder: (context, index){
+                             return Card(
+                                 color: Colors.green,
+                               margin: const EdgeInsets.only(left: 5,right: 5,top: 5),
+                                 child: Padding(
+                                   padding: const EdgeInsets.only(
+                                     left: 10,right: 5,
+                                   ),
+                                   child: Column(
+                                     children: [
+                                       Row(
+                                         mainAxisAlignment: MainAxisAlignment.start,
+                                         children: [
+                                           const Text(
+                                             'Name:',
+                                             style: TextStyle(
+                                               color: Colors.white,
+                                                 fontSize: 20,
+                                                 fontWeight: FontWeight.w300
+                                             ),
+                                           ),
+                                           Text(
+                                               snapshot.data!.docs[index]['name'],
+                                             style: const TextStyle(
+                                               color: Colors.white,
+                                               fontSize: 20,
+                                               fontWeight: FontWeight.w300,
+                                               overflow: TextOverflow.fade
+                                             ),
+                                           ),
+                                         ],
+                                       ),
+                                       Row(
+                                         mainAxisAlignment: MainAxisAlignment.start,
+                                         children: [
+                                           const Text(
+                                             'Email:',
+                                             style: TextStyle(
+                                                 color: Colors.white,
+                                                 fontSize: 20,
+                                                 fontWeight: FontWeight.w300
+                                             ),
+                                           ),
+                                           Text(
+                                             snapshot.data!.docs[index]['email'],
+                                             style: const TextStyle(
+                                                 color: Colors.white,
+                                                 fontSize: 20,
+                                                 fontWeight: FontWeight.w300
+                                             ),
+                                           ),
+                                         ],
+                                       ),
+                                       Row(
+                                         mainAxisAlignment: MainAxisAlignment.start,
+                                         children: [
+                                           const Text(
+                                             'Address:',
+                                             style: TextStyle(
+                                                 color: Colors.white,
+                                                 fontSize: 20,
+                                                 fontWeight: FontWeight.w300
+                                             ),
+                                           ),
+                                           Expanded(
+                                             child: Text(
+                                               snapshot.data!.docs[index]['address'],
+                                               style: const TextStyle(
+                                                   color: Colors.white,
+                                                   fontSize: 20,
+                                                   fontWeight: FontWeight.w300
+                                               ),
+                                               maxLines: 1,
+                                               textDirection: TextDirection.ltr,
+                                               textAlign: TextAlign.justify,
+                                               overflow: TextOverflow.ellipsis,
+                                             ),
+                                           ),
+                                         ],
+                                       ),
+                                     ],
+                                   ),
+                                 ),
+                             );
+                           },
+                         ),
+                       );
+                     }  else{
+                       return Container(height: 0,);
+                     }
+                      }
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.only(left: 50.0,right: 50),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  hintText: 'Phone Number',
-                  hintStyle: TextStyle(color: Colors.white),
-                ),
-                cursorColor: Colors.white,
-              ),
-            ),
-            const SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.only(left: 50.0,right: 50),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                        width: 1,
-                      ),
+            Card(
+              color: Colors.green,
+              margin: const EdgeInsets.only(left: 50,right: 50),
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Text('Edit Profile:'),
+                IconButton(
+                    onPressed: (){
+                      showDialog(
+                          context: context,
+                          builder: (context){
+                            return Dialog(
+                              backgroundColor: Colors.green,
+                              child: Form(
+                                key: _formKey,
+                                child: ListView(
+                                  shrinkWrap: true,
+                                  physics: const BouncingScrollPhysics(),
+                                  padding: const EdgeInsets.only(top: 10,bottom: 10),
+                                  children: [
+                                    StreamBuilder(
+                                        stream: FirebaseFirestore.instance.collection('user info').snapshots(),
+                                        builder: (context, AsyncSnapshot<QuerySnapshot>snapshot){
+                                          if (snapshot.hasData) {
+                                            return SizedBox(
+                                              height: 100,
+                                              child: ListView.builder(
+                                                itemCount: snapshot.data!.docs.length,
+                                                itemBuilder: (context, index){
+                                                  return Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Text(
+                                                        snapshot.data!.docs[index]['name'],
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 20,
+                                                            fontWeight: FontWeight.w300,
+                                                            overflow: TextOverflow.fade
+                                                        ),
+                                                      ),
+                                                      const Text(
+                                                          "'s profile",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 20,
+                                                            fontWeight: FontWeight.w300,
+                                                            overflow: TextOverflow.fade,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(width: 80,),
+                                                      IconButton(
+                                                          onPressed: (){
+                                                            Navigator.pop(context);
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.cancel_outlined,
+                                                            color: Colors.white.withOpacity(.9),
+                                                            size: 30,
+                                                            shadows: const [
+                                                              BoxShadow(
+                                                                  offset: Offset.zero,
+                                                                  blurRadius: 5,
+                                                                  spreadRadius: 5
+                                                              ),
+                                                            ],
+                                                          ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                            );
+                                          }  else{
+                                            return Container(height: 0,);
+                                          }
+                                        }
+                                    ),
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 20,right: 20),
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                  color: Colors.white,
+                                                  width: 2,
+                                                ),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              hintText: 'Name',
+                                              hintStyle: const TextStyle(color: Colors.white),
+                                            ),
+                                            cursorColor: Colors.white,
+                                            controller: _nameController,
+                                            validator: (value){
+                                              if (value!.isEmpty) {
+                                                return "Can't be empty";
+                                              }  else {
+                                                return null;
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10,),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 20,right: 20),
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                  color: Colors.white,
+                                                  width: 2,
+                                                ),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              hintText: 'Email',
+                                              hintStyle: const TextStyle(color: Colors.white),
+                                            ),
+                                            cursorColor: Colors.white,
+                                            controller: _emailController,
+                                            keyboardType: TextInputType.emailAddress,
+                                            validator: (value){
+                                              if (value!.isEmpty) {
+                                                return "Can't be empty";
+                                              }
+                                              //else if (int.fromEnvironment(value)>11){return "Invalid email";}
+                                              else {
+                                                return null;
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10,),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 20,right: 20),
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                  color: Colors.white,
+                                                  width: 1,
+                                                ),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(8),
+                                                borderSide: const BorderSide(
+                                                  color: Colors.white,
+                                                  width: 2,
+                                                ),
 
+                                              ),
+                                              hintText: 'Address',
+                                              hintStyle: const TextStyle(color: Colors.white),
+                                            ),
+                                            cursorColor: Colors.white,
+                                            controller: _addressController,
+                                            validator: (value){
+                                              if (value!.isEmpty) {
+                                                return "Can't be empty";
+                                              }
+                                              else {
+                                                return null;
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10,),
+                                        ElevatedButton(
+                                          onPressed: (){
+                                            setState(() {
+                                              if (_formKey.currentState!.validate()) {
+                                                Navigator.pop(context);
+                                              }
+                                            });
+                                            Map<String, dynamic> userdata={
+                                              'name':_nameController.text,
+                                              'email': _emailController.text,
+                                              'address': _addressController.text,
+                                              'uid':uId,
+                                            };
+                                            FirebaseFirestore.instance.collection('user info').add(userdata);
+                                          },
+                                          style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all(Colors.green),
+                                          ),
+                                          child: const Text("Update"),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+
+                              ),
+                            );
+                          }
+                      );
+                    },
+                    icon: const Icon(
+                        Icons.edit
                     ),
-                  hintText: 'Address',
-                  hintStyle: TextStyle(color: Colors.white),
                 ),
-                cursorColor: Colors.white,
-              ),
+              ],
             ),
-            const SizedBox(height: 10,),
-            ElevatedButton(
-                onPressed: (){},
-                child: Text("Update"),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.green),
-              ),
             ),
+
           ],
         ),
       ),

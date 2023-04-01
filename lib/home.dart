@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
               Navigator.push(context, MaterialPageRoute(builder: (_)=>const Profile()));
             },
             child: const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/loginimage.png'),
+              backgroundImage: AssetImage('assets/images/welcomeimage.jpg'),
             ),
           ),
         ],

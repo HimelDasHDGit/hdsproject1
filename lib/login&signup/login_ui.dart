@@ -34,7 +34,8 @@ class _LoginUiState extends State<LoginUi> {
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 30,
-                    color: Colors.white70,
+                    color: Colors.white,
+                    fontFamily: 'Pacifico',
                   ),
                 ),
               ),
