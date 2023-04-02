@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hdsproject1/profile/profile.dart';
+import 'package:flutter/services.dart';
+import 'package:hdsproject1/showprofile/profile.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -47,11 +48,11 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               Image.asset('assets/images/loginimage.png'),
-               SizedBox(height: 150,),
-               Divider(height: .2,color: Colors.white,),
+               const SizedBox(height: 150,),
+               const Divider(height: .2,color: Colors.white,),
                ListTile(
                 onTap: (){},
-                leading: Text(
+                leading: const Text(
                   'Cart',
                   style: TextStyle(
                     fontFamily: 'Pacifico',
@@ -59,12 +60,12 @@ class _HomeState extends State<Home> {
                     color: Colors.white
                   ),
                 ),
-                trailing: Icon(Icons.shopping_cart,size: 25,color: Colors.yellow,),
+                trailing: const Icon(Icons.shopping_cart,size: 25,color: Colors.yellow,),
               ),
-               Divider(height: .2,color: Colors.white,),
+               const Divider(height: .2,color: Colors.white,),
                ListTile(
                  onTap: (){},
-                leading: Text(
+                leading: const Text(
                   'Sellers',
                   style: TextStyle(
                       fontFamily: 'Pacifico',
@@ -72,12 +73,12 @@ class _HomeState extends State<Home> {
                       color: Colors.white
                   ),
                 ),
-                trailing: Icon(Icons.sell,size: 25,color: Colors.yellow,),
+                trailing: const Icon(Icons.sell,size: 25,color: Colors.yellow,),
               ),
-               Divider(height: .2,color: Colors.white,),
+               const Divider(height: .2,color: Colors.white,),
                ListTile(
                  onTap: (){},
-                leading: Text(
+                leading: const Text(
                   'Top sellers',
                   style: TextStyle(
                       fontFamily: 'Pacifico',
@@ -85,12 +86,12 @@ class _HomeState extends State<Home> {
                       color: Colors.white
                   ),
                 ),
-                trailing: Icon(Icons.people,size: 25,color: Colors.yellow,),
+                trailing: const Icon(Icons.people,size: 25,color: Colors.yellow,),
               ),
-               Divider(height: .2,color: Colors.white,),
+               const Divider(height: .2,color: Colors.white,),
                ListTile(
                  onTap: (){},
-                leading: Text(
+                leading: const Text(
                   'Premium',
                   style: TextStyle(
                       fontFamily: 'Pacifico',
@@ -98,12 +99,12 @@ class _HomeState extends State<Home> {
                       color: Colors.white
                   ),
                 ),
-                trailing: Icon(Icons.star_sharp,size: 25,color: Colors.yellow,),
+                trailing: const Icon(Icons.star_sharp,size: 25,color: Colors.yellow,),
               ),
-               Divider(height: .2,color: Colors.white,),
+               const Divider(height: .2,color: Colors.white,),
                ListTile(
                 onTap: (){},
-                leading: Text(
+                leading: const Text(
                   'Design temp.',
                   style: TextStyle(
                       fontFamily: 'Pacifico',
@@ -115,15 +116,17 @@ class _HomeState extends State<Home> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                   ),
-                    child: Image.asset('assets/images/design2.png',fit: BoxFit.cover,color: Colors.white,),
                   height: 35,
                   width: 35,
+                    child: Image.asset('assets/images/design2.png',fit: BoxFit.cover,color: Colors.white,),
                 ),
               ),
-               Divider(height: .2,color: Colors.white,),
+               const Divider(height: .2,color: Colors.white,),
                ListTile(
-                 onTap: (){},
-                leading: Text(
+                 onTap: (){
+                   SystemNavigator.pop();
+                 },
+                leading: const Text(
                   'Exit',
                   style: TextStyle(
                       fontFamily: 'Pacifico',
@@ -131,13 +134,14 @@ class _HomeState extends State<Home> {
                       color: Colors.white,
                   ),
                 ),
-                trailing: Icon(Icons.exit_to_app,size: 25,color: Colors.yellow,),
+                trailing: const Icon(Icons.exit_to_app,size: 25,color: Colors.yellow,),
               ),
-               Divider(height: .2,color: Colors.white,),
+               const Divider(height: .2,color: Colors.white,),
             ],
           ),
         ),
       ),
+      body: Text("Home"),
     );
   }
 }

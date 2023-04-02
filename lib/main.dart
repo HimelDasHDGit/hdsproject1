@@ -2,7 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
-import 'package:hdsproject1/login&signup/login_ui.dart';
+import 'createprofile&welcome/make a profile/create_profile.dart';
+import 'home.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,13 +23,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AuthGate(),
+      home:  AuthGate(),
     );
   }
 }
 
 class AuthGate extends StatelessWidget {
-  const AuthGate({Key? key}) : super(key: key);
+   AuthGate({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class AuthGate extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context,snapshot){
         if (snapshot.hasData) {
-          return const LoginUi();
+          return  const CreateProfile();
         }  else{
           return const SignInScreen(
             providerConfigs: [

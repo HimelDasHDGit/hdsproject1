@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hdsproject1/home.dart';
 
 
-class LoginUi extends StatefulWidget {
-  const LoginUi({Key? key}) : super(key: key);
+class Welcome extends StatefulWidget {
+  const Welcome({Key? key}) : super(key: key);
 
   @override
-  State<LoginUi> createState() => _LoginUiState();
+  State<Welcome> createState() => _WelcomeState();
 }
 
-class _LoginUiState extends State<LoginUi> {
+class _WelcomeState extends State<Welcome> {
 
   bool _isloading=false;
 
