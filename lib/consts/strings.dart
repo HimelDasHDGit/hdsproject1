@@ -1,0 +1,12 @@
+const appname = "bonSAI";
+const appversion = "Version 1.0.0";
+const credits = "@hd";
+const email = "Email";
+const emailHint = "mas@gmail.com";
+const password = "Password";
+const passwordHint = "********";
+const forgetPass = "Forget Password";
+const login = "Log in";
+const signup = "Sign up";
+const createNewAccount = "or, create a new account";
+const loginWith = "Login with";

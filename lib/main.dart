@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/auth.dart';
-import 'createprofile&welcome/make a profile/create_profile.dart';
-import 'home.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:hdsproject1/consts/consts.dart';
+import 'views/splash_screen/splash_screen.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,35 +16,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.transparent,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+        ),
+        fontFamily: regular,
       ),
-      home:  AuthGate(),
-    );
-  }
-}
-
-class AuthGate extends StatelessWidget {
-   AuthGate({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context,snapshot){
-        if (snapshot.hasData) {
-          return  const CreateProfile();
-        }  else{
-          return const SignInScreen(
-            providerConfigs: [
-              PhoneProviderConfiguration(),
-            ],
-          );
-        }
-      },
+      home: const SplashScreen(),
     );
   }
 }
