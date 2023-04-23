@@ -1,5 +1,7 @@
+import 'package:get/get.dart';
 import 'package:hdsproject1/consts/consts.dart';
 import 'package:hdsproject1/consts/lists.dart';
+import 'package:hdsproject1/views/auth_screen/signup_screen.dart';
 import 'package:hdsproject1/widgets_common/bg_widget.dart';
 import 'package:hdsproject1/widgets_common/button.dart';
 import '../../widgets_common/app_logo_widget.dart';
@@ -19,7 +21,7 @@ class LoginScreen extends StatelessWidget {
               (context.screenHeight * 0.1).heightBox,
               applogoWidget(),
               10.heightBox,
-              "Log in to $appname".text.fontFamily(bold).white.size(18).make(),
+              "Login to $appname".text.fontFamily(bold).white.size(18).make(),
               15.heightBox,
               Column(
                 children: [
@@ -40,7 +42,9 @@ class LoginScreen extends StatelessWidget {
                   5.heightBox,
                   createNewAccount.text.color(fontGrey).make(),
                   5.heightBox,
-                  button(color: lightGolden,title: signup, textColor: redColor,onPress: (){}).
+                  button(color: lightGolden,title: signup, textColor: redColor,onPress: (){
+                    Get.to(()=> const SignUpScreen());
+                  }).
                   box.
                   width(context.screenWidth -50).
                   make(),
@@ -54,8 +58,8 @@ class LoginScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: CircleAvatar(
                           backgroundColor: lightGrey,
-                          child: Image.asset(socialIconList[index],width: 30,),
                           radius: 25,
+                          child: Image.asset(socialIconList[index],width: 30,),
                         ),
                       ),
                   ),
