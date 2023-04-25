@@ -17,3 +17,7 @@ const privecyPolicy = "Privecy policy.";
 const termAndCond = "Terms and conditions";
 const alreadyHaveAcc = "Already have an account? ";
 const home = "home", categories = "Categories", cart = "Cart", account = "Account";
+const searchAnything = "Search anything...", todayDeal = "Today's Deal", flashSale = "Falash Sale",
+topSellers = "Top Sellers", brand = "Brand", topCategories = "Top Categories",
+    featureCategories = "Featured Categories", mobilePhone = "Mobile Phone", boysGlasses = "Boys Glasses",
+    womenDress = "Women Dress",girlsWatches = "Girls Watches", tshirts = "T-shirts", girlsDress = "Girls Dress";
