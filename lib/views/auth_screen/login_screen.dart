@@ -6,6 +6,7 @@ import 'package:hdsproject1/widgets_common/bg_widget.dart';
 import 'package:hdsproject1/widgets_common/button.dart';
 import '../../widgets_common/app_logo_widget.dart';
 import '../../widgets_common/custom_textfield.dart';
+import '../home_screen/home.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -35,7 +36,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   5.heightBox,
-                  button(color: redColor,title: login,textColor: whiteColor,onPress: (){}).
+                  button(color: redColor,title: login,textColor: whiteColor,onPress: (){
+                    Get.to(()=>Home());
+                  }).
                   box.
                   width(context.screenWidth -50).
                   make(),
