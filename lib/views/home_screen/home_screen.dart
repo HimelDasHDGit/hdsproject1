@@ -161,6 +161,29 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                   20.heightBox,
+                  GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                      itemCount: 6,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                        mainAxisExtent: 300,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8
+                      ),
+                      itemBuilder: (context, index){
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(imgP5,width: 200,height:200, fit: BoxFit.cover,),
+                            Spacer(),
+                            "Laptop 32GB/64GB".text.fontFamily(semibold).color(darkFontGrey).make(),
+                            10.heightBox,
+                            "৳60000".text.color(redColor).fontFamily(bold).size(16).make(),
+                          ],
+                        ).box.white.roundedSM.margin(EdgeInsets.symmetric(horizontal: 4)).padding(EdgeInsets.all(12)).make();
+                      },
+                  ),
                 ],
               ),
           ),
