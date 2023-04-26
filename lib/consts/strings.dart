@@ -20,4 +20,5 @@ const home = "home", categories = "Categories", cart = "Cart", account = "Accoun
 const searchAnything = "Search anything...", todayDeal = "Today's Deal", flashSale = "Falash Sale",
 topSellers = "Top Sellers", brand = "Brand", topCategories = "Top Categories",
     featureCategories = "Featured Categories", mobilePhone = "Mobile Phone", boysGlasses = "Boys Glasses",
-    womenDress = "Women Dress",girlsWatches = "Girls Watches", tshirts = "T-shirts", girlsDress = "Girls Dress";
+    womenDress = "Women Dress",girlsWatches = "Girls Watches", tshirts = "T-shirts", girlsDress = "Girls Dress",
+featuredProduct = "Featured Product";

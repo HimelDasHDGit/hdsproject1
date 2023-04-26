@@ -1,11 +1,11 @@
 import 'package:hdsproject1/consts/consts.dart';
 
-Widget featuredButton(){
+Widget featuredButton({String? title,icon}){
   return Row(
     children: [
-      Image.asset(imgSs1,width: 60,height: 30,fit: BoxFit.fill,),
+      Image.asset(icon,width: 60,height: 30,fit: BoxFit.fill,),
       10.widthBox,
-      womenDress.text.fontFamily(semibold).color(darkFontGrey).make(),
+      title!.text.fontFamily(semibold).color(darkFontGrey).make(),
     ],
   ).box.width(200).margin(EdgeInsets.symmetric(
     horizontal: 4,

@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
       color: lightGrey,
       width: context.screenWidth,
       height: context.screenHeight,
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       child: SafeArea(
           child: Column(
             children: [
@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             alignment: Alignment.center,
             color: lightGrey,
             child: TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 disabledBorder: InputBorder.none,
                 fillColor: whiteColor,
@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
            10.heightBox,
             Expanded(
               child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   VxSwiper.builder(
@@ -49,11 +49,11 @@ class HomeScreen extends StatelessWidget {
                     itemBuilder: (context,index){
                       return Image.asset(sliderlist[index],fit: BoxFit.cover,).box
                           .rounded.clip(Clip.antiAlias).
-                      margin(EdgeInsets.symmetric(horizontal: 8,),)
+                      margin(const EdgeInsets.symmetric(horizontal: 8,),)
                           .make();
                     },
                   ),
-                  10.heightBox,
+                  20.heightBox,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(
@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ),
                   ),
-                  10.heightBox,
+                  20.heightBox,
                   VxSwiper.builder(
                     aspectRatio: 16/9,
                     autoPlay: true,
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                     itemBuilder: (context,index){
                       return Image.asset(secondsliderlist[index],fit: BoxFit.cover,).box
                           .rounded.clip(Clip.antiAlias).
-                      margin(EdgeInsets.symmetric(horizontal: 8,),)
+                      margin(const EdgeInsets.symmetric(horizontal: 8,),)
                           .make();
                     },
                   ),
@@ -101,16 +101,66 @@ class HomeScreen extends StatelessWidget {
                   20.heightBox,
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
+                    physics: BouncingScrollPhysics(),
                     child: Row(
                       children: List.generate(3, (index) => Column(
                         children: [
-                          featuredButton(),
+                          featuredButton(icon: featuredImages1[index],title: featuredTitle1[index]),
                           10.heightBox,
-                          featuredButton(),
+                          featuredButton(icon: featuredImages2[index],title: featuredTitle2[index]),
                         ],
                       )).toList(),
                     ),
                   ),
+                  20.heightBox,
+                  Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: redColor,
+                    ),
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        featuredProduct.text.white.fontFamily(bold).size(18).make(),
+                        10.heightBox,
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          physics: BouncingScrollPhysics(),
+                          child: Row(
+                            children: List.generate(
+                                6, (index) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(imgP1,width: 150,fit: BoxFit.cover,),
+                                10.heightBox,
+                                "Laptop 32GB/64GB".text.fontFamily(semibold).color(darkFontGrey).make(),
+                                10.heightBox,
+                                "৳60000".text.color(redColor).fontFamily(bold).size(16).make(),
+                              ],
+                            ).box.white.margin(EdgeInsets.symmetric(horizontal: 4))
+                                .roundedSM.padding(const EdgeInsets.all(8)).make(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  20.heightBox,
+                  VxSwiper.builder(
+                    aspectRatio: 16/9,
+                    autoPlay: true,
+                    height: 150,
+                    enlargeCenterPage: true,
+                    itemCount: secondsliderlist.length,
+                    itemBuilder: (context,index){
+                      return Image.asset(secondsliderlist[index],fit: BoxFit.cover,).box
+                          .rounded.clip(Clip.antiAlias).
+                      margin(const EdgeInsets.symmetric(horizontal: 8,),)
+                          .make();
+                    },
+                  ),
+                  20.heightBox,
                 ],
               ),
           ),
