@@ -14,7 +14,7 @@ const featuredTitle2 = [boysGlasses,mobilePhone,tshirts];
 
 //category_list
 const categoryList = [
- womenclothing,menClothingFashion,compAccess,autoMobile,kidToys,sports,jewelery,cellphone,furniture
+ menClothingFashion,compAccess,autoMobile,kidToys,sports,cellphone,jewelery,construction,furniture
 ];
 
 const categoryImages = [

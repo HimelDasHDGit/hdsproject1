@@ -181,7 +181,8 @@ class HomeScreen extends StatelessWidget {
                             10.heightBox,
                             "৳60000".text.color(redColor).fontFamily(bold).size(16).make(),
                           ],
-                        ).box.white.roundedSM.margin(EdgeInsets.symmetric(horizontal: 4)).padding(EdgeInsets.all(12)).make();
+                        ).box.white.roundedSM.margin(EdgeInsets.symmetric(horizontal: 4)).
+                        padding(EdgeInsets.all(12)).make();
                       },
                   ),
                 ],

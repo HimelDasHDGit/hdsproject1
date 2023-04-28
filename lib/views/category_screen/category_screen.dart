@@ -1,6 +1,10 @@
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:hdsproject1/consts/consts.dart';
 import 'package:hdsproject1/consts/lists.dart';
 import 'package:hdsproject1/widgets_common/bg_widget.dart';
+
+import 'category_details.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -29,11 +33,13 @@ class CategoryScreen extends StatelessWidget {
                   children: [
                     Image.asset(categoryImages[index],height: 120,width: 200, fit: BoxFit.cover,),
                     10.heightBox,
-                    "${categoryList[index]}".text.fontFamily(semibold).align(TextAlign.center).color(darkFontGrey).make(),
+                    Center(child: "${categoryList[index]}".text.fontFamily(semibold).align(TextAlign.center).color(darkFontGrey).make()),
                     10.heightBox,
-                    "৳60000".text.color(redColor).fontFamily(bold).size(16).make(),
+                    Center(child: "৳6,00,000".text.color(redColor).fontFamily(bold).size(16).align(TextAlign.center).make()),
                   ],
-                ).box.white.rounded.clip(Clip.antiAlias).outerShadowSm.make();
+                ).box.white.rounded.clip(Clip.antiAlias).outerShadowSm.make().onTap(() {
+                  Get.to(()=> CategoryDetails(title: categoryList[index],));
+                });
               },
           ),
         ),

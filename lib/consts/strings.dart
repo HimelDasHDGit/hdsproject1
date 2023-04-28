@@ -23,6 +23,6 @@ topSellers = "Top Sellers", brand = "Brand", topCategories = "Top Categories",
     womenDress = "Women Dress",girlsWatches = "Girls Watches", tshirts = "T-shirts", girlsDress = "Girls Dress",
 featuredProduct = "Featured Product";
 //categories
-const womenclothing = "Women Clothing", menClothingFashion = "Men Clothing & Fashion",
+const construction = "Construction Tools", menClothingFashion = "Men Clothing & Fashion",
     compAccess = "Computer Accessories", autoMobile = "Automobile", kidToys = "Kids Toys", sports = "Sports",
 jewelery = "jewelery", cellphone = "Cellphone", furniture = "Furniture";
