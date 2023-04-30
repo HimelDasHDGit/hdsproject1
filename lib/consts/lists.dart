@@ -20,3 +20,8 @@ const categoryList = [
 const categoryImages = [
  imgFc1, imgFc2, imgFc3, imgFc4, imgFc5, imgFc6, imgFc7, imgFc8, imgFc9,
 ];
+
+const itemDetailButtonList = [video,reviews,sellerPolicy,supportPolicy,returnPolicy];
+
+const profileButtonsList = [orders,wishList,messages];
+const profileButtonIcon = [icOrder,icOrder,icMessages];

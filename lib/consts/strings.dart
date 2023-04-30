@@ -10,6 +10,9 @@ const name = "Name";
 const nameHint = "Himel";
 const forgetPass = "Forget Password";
 const login = "Log in";
+const loggedin = "Loged in successfully";
+const loggedout = "Loged out successfully";
+const logout = "Logout";
 const signup = "Sign up";
 const createNewAccount = "or, create a new account";
 const loginWith = "Login with";
@@ -26,3 +29,10 @@ featuredProduct = "Featured Product";
 const construction = "Construction Tools", menClothingFashion = "Men Clothing & Fashion",
     compAccess = "Computer Accessories", autoMobile = "Automobile", kidToys = "Kids Toys", sports = "Sports",
 jewelery = "jewelery", cellphone = "Cellphone", furniture = "Furniture";
+
+//item details
+const video = "Video", reviews = "Reviews", sellerPolicy = "Seller Policy",
+    supportPolicy = "Support Policy", returnPolicy = "Return Policy", productsYouLike = "Products You Like";
+
+//profile
+const wishList = "My wishlist", orders = "My Orders", messages = "Messages";
