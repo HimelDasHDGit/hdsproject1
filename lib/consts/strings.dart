@@ -35,4 +35,4 @@ const video = "Video", reviews = "Reviews", sellerPolicy = "Seller Policy",
     supportPolicy = "Support Policy", returnPolicy = "Return Policy", productsYouLike = "Products You Like";
 
 //profile
-const wishList = "My wishlist", orders = "My Orders", messages = "Messages";
+const wishList = "My wishlist", orders = "My Orders", messages = "Messages",oldpass='Old password',newpass='New password';

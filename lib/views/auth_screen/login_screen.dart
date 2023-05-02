@@ -45,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                         onPress: ()async{
                       controller.isLoading(true);
                       await controller.loginMethod(context: context).then((value){
-                        if (value !=null) {
+                        if (value != null) {
                           VxToast.show(context, msg: loggedin);
                           Get.offAll(()=> const Home());
                         }else{
