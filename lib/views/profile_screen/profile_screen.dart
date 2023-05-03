@@ -34,84 +34,87 @@ class ProfileScreen extends StatelessWidget {
 
 
              return SafeArea(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 5),
-                      child: const Align(
-                        alignment: Alignment.bottomRight,
-                        child: Icon(Icons.edit,color: whiteColor),
-                      ).onTap(() {
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                        child: const Align(
+                          alignment: Alignment.bottomRight,
+                          child: Icon(Icons.edit,color: whiteColor),
+                        ).onTap(() {
 
-                        controller.nameController.text = data['name'];
+                          controller.nameController.text = data['name'];
 
-                        Get.to(()=>  EditprofileScreen(
-                          data: data,
-                        ));
+                          Get.to(()=>  EditprofileScreen(
+                            data: data,
+                          ));
 
-                      }),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Row(
-                        children: [
+                        }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Row(
+                          children: [
 
-                          data['imageUrl'] == ""?
-                          Image.asset(imgProfile2,width: 100,fit: BoxFit.cover,).
-                          box.roundedFull.clip(Clip.antiAlias).make():
+                            data['imageUrl'] == ""?
+                            Image.asset(imgProfile2,width: 100,fit: BoxFit.cover,).
+                            box.roundedFull.clip(Clip.antiAlias).make():
 
-                          Image.network(data['imageUrl'],width: 100,height: 100,fit: BoxFit.cover,).
-                          box.roundedFull.clip(Clip.antiAlias).make(),
+                            Image.network(data['imageUrl'],width: 100,height: 100,fit: BoxFit.cover,).
+                            box.roundedFull.clip(Clip.antiAlias).make(),
 
 
-                          10.widthBox,
-                          Expanded(
-                              child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              "${data['name']}".text.fontFamily(semibold).white.make(),
-                              "${data['email']}".text.white.make(),
-                            ],
-                          )),
-                          5.widthBox,
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              side: const BorderSide(
-                                color: whiteColor,
+                            10.widthBox,
+                            Expanded(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                "${data['name']}".text.fontFamily(semibold).white.make(),
+                                "${data['email']}".text.white.make(),
+                              ],
+                            )),
+                            5.widthBox,
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                side: const BorderSide(
+                                  color: whiteColor,
+                                ),
                               ),
+                              onPressed: ()async{
+                                await Get.put(AuthController()).signout(context);
+                                Get.offAll(()=> LoginScreen());
+                              }, child: logout.text.fontFamily(semibold).white.make(),
                             ),
-                            onPressed: ()async{
-                              await Get.put(AuthController()).signout(context);
-                              Get.offAll(()=> LoginScreen());
-                            }, child: logout.text.fontFamily(semibold).white.make(),
-                          ),
+                          ],
+                        ),
+                      ),
+                      5.heightBox,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          detailsCard(count: data['cart_count'],title: "Your cart",width: context.screenWidth/3.5),
+                          detailsCard(count: data['oredr_count'],title: "Your wishlist",width: context.screenWidth/3.5),
+                          detailsCard(count: data['wishlist_count'],title: "Your orders",width: context.screenWidth/3.5),
                         ],
                       ),
-                    ),
-                    5.heightBox,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        detailsCard(count: data['cart_count'],title: "Your cart",width: context.screenWidth/3.5),
-                        detailsCard(count: data['oredr_count'],title: "Your wishlist",width: context.screenWidth/3.5),
-                        detailsCard(count: data['wishlist_count'],title: "Your orders",width: context.screenWidth/3.5),
-                      ],
-                    ),
-                    ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index){
-                        return ListTile(
-                          title: profileButtonsList[index].text.fontFamily(semibold).color(darkFontGrey).make(),
-                          leading: Image.asset(profileButtonIcon[index],width: 22,),
-                        );
-                      },
-                      separatorBuilder: (context, index){
-                        return const Divider(color: lightGrey,);
-                      },
-                      itemCount: profileButtonsList.length,
-                    ).box.white.rounded.margin(const EdgeInsets.all(12)).padding(const EdgeInsets.symmetric(horizontal: 16)).shadowSm.make().box.color(redColor).make(),
-                  ],
+                      ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index){
+                          return ListTile(
+                            title: profileButtonsList[index].text.fontFamily(semibold).color(darkFontGrey).make(),
+                            leading: Image.asset(profileButtonIcon[index],width: 22,),
+                          );
+                        },
+                        separatorBuilder: (context, index){
+                          return const Divider(color: lightGrey,);
+                        },
+                        itemCount: profileButtonsList.length,
+                      ).box.white.rounded.margin(const EdgeInsets.all(12)).padding(const EdgeInsets.symmetric(horizontal: 16)).shadowSm.make().box.color(redColor).make(),
+                    ],
+                  ),
                 ),
               );
             }

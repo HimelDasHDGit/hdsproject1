@@ -26,9 +26,9 @@ topSellers = "Top Sellers", brand = "Brand", topCategories = "Top Categories",
     womenDress = "Women Dress",girlsWatches = "Girls Watches", tshirts = "T-shirts", girlsDress = "Girls Dress",
 featuredProduct = "Featured Product";
 //categories
-const construction = "Construction Tools", menClothingFashion = "Men Clothing & Fashion",
-    compAccess = "Computer Accessories", autoMobile = "Automobile", kidToys = "Kids Toys", sports = "Sports",
-jewelery = "jewelery", cellphone = "Cellphone", furniture = "Furniture";
+const construction = "Women Dress", menClothingFashion = "Men Clothing & Fashion",
+    compAccess = "Computer & Accessories", autoMobile = "Automobile", kidToys = "Kid's Toys", sports = "Stports Accessories",
+jewelery = "Jewelery", cellphone = "Cellphone & Tab", furniture = "Furniture";
 
 //item details
 const video = "Video", reviews = "Reviews", sellerPolicy = "Seller Policy",

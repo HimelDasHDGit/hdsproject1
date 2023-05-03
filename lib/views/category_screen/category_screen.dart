@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hdsproject1/consts/consts.dart';
 import 'package:hdsproject1/consts/lists.dart';
+import 'package:hdsproject1/controllers/product_controller.dart';
 import 'package:hdsproject1/widgets_common/bg_widget.dart';
 
 import 'category_details.dart';
@@ -11,14 +12,19 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var controller = Get.put(ProductController());
+
     return bgWidget(
       child: Scaffold(
         appBar: AppBar(
           title: categories.text.fontFamily(bold).white.make(),
+          automaticallyImplyLeading: false,
         ),
         body: Container(
           padding: EdgeInsets.all(12),
           child: GridView.builder(
+            physics: BouncingScrollPhysics(),
             shrinkWrap: true,
               itemCount: 9,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -38,6 +44,7 @@ class CategoryScreen extends StatelessWidget {
                     Center(child: "৳6,00,000".text.color(redColor).fontFamily(bold).size(16).align(TextAlign.center).make()),
                   ],
                 ).box.white.rounded.clip(Clip.antiAlias).outerShadowSm.make().onTap(() {
+                  controller.getSubCategories(categoryList[index]);
                   Get.to(()=> CategoryDetails(title: categoryList[index],));
                 });
               },
