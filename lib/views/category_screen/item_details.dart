@@ -4,6 +4,7 @@ import 'package:hdsproject1/consts/lists.dart';
 
 import '../../controllers/product_controller.dart';
 import '../../widgets_common/button.dart';
+import '../chat_screen/chat_screen.dart';
 
 class ItemDetails extends StatelessWidget {
 
@@ -95,7 +96,9 @@ class ItemDetails extends StatelessWidget {
                             const CircleAvatar(
                               backgroundColor: Colors.white,
                               child: Icon(Icons.message_rounded,color: darkFontGrey,),
-                            ),
+                            ).onTap(() {
+                              Get.to(()=> ChatScreen(),arguments: [data['seller'],data['vendor_id']]);
+                            }),
                           ],
                         ).box.height(60).padding(const EdgeInsets.symmetric(horizontal: 16)).
                         color(textfieldGrey).make(),

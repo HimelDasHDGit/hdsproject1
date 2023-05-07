@@ -38,18 +38,19 @@ class CartScreen extends StatelessWidget {
             controller.calculate(data);
 
             return Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Column(
+
                 children: [
                   Expanded(
                       child: ListView.builder(
                         itemCount: data.length,
                           itemBuilder: (BuildContext context, int index){
                             return ListTile(
-                              leading: Image.network("${data[index]['img']}"),
+                              leading: Image.network("${data[index]['img']}").box.size(100, 100).make(),
                               title: "${data[index]['title']} -${data[index]['qty']}x".text.fontFamily(semibold).size(16).make(),
                               subtitle: "${data[index]['tprice']}".numCurrency.text.fontFamily(semibold).color(redColor).make(),
-                              trailing: Icon(Icons.delete,color: redColor,).onTap(() {
+                              trailing: const Icon(Icons.delete,color: redColor,).onTap(() {
                                 FirestoreServices.deleteDocument(data[index].id);
                               }),
                             );
@@ -62,7 +63,7 @@ class CartScreen extends StatelessWidget {
                       "Total price".text.fontFamily(semibold).color(darkFontGrey).make(),
                       Obx(()=> "${controller.totalP.value}".numCurrency.text.fontFamily(semibold).color(redColor).make()),
                     ],
-                  ).box.padding(EdgeInsets.all(12)).width(context.screenWidth - 60,).color(lightGolden).roundedSM.make(),
+                  ).box.padding(const EdgeInsets.all(12)).width(context.screenWidth - 60,).color(lightGolden).roundedSM.make(),
                   10.heightBox,
                   SizedBox(
                     width: context.screenWidth - 60,
