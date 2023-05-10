@@ -23,5 +23,10 @@ const categoryImages = [
 
 const itemDetailButtonList = [video,reviews,sellerPolicy,supportPolicy,returnPolicy];
 
+//profileButtonsList
 const profileButtonsList = [orders,wishList,messages];
 const profileButtonIcon = [icOrder,icOrder,icMessages];
+
+//payment list
+const paymentMethodsImg = [imgPaypal,imgStripe,imgCod];
+const paymentMethodsList = [paypal,stripe,cod];

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:hdsproject1/consts/consts.dart';
 import 'package:hdsproject1/services/firestore_services.dart';
+import 'package:hdsproject1/views/cart_screen/shipping_screen.dart';
 
 import '../../controllers/cart_controller.dart';
 import '../../widgets_common/button.dart';
@@ -17,6 +18,17 @@ class CartScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: whiteColor,
+      bottomNavigationBar: SizedBox(
+        width: context.screenWidth - 60,
+        child: button(
+          color: redColor,
+          onPress: (){
+            Get.to(()=>ShippingScreen());
+          },
+          textColor: whiteColor,
+          title: 'Proceed to Shipping',
+        ),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: "Shopping Cart".text.color(darkFontGrey).fontFamily(semibold).make(),
@@ -36,6 +48,7 @@ class CartScreen extends StatelessWidget {
 
             var data = snapshot.data!.docs;
             controller.calculate(data);
+            controller.productSnapshot = data;
 
             return Padding(
               padding: const EdgeInsets.all(8),
@@ -65,15 +78,15 @@ class CartScreen extends StatelessWidget {
                     ],
                   ).box.padding(const EdgeInsets.all(12)).width(context.screenWidth - 60,).color(lightGolden).roundedSM.make(),
                   10.heightBox,
-                  SizedBox(
-                    width: context.screenWidth - 60,
-                    child: button(
-                      color: redColor,
-                      onPress: (){},
-                      textColor: whiteColor,
-                      title: 'Proceed to Shipping',
-                    ),
-                  ),
+                  // SizedBox(
+                  //   width: context.screenWidth - 60,
+                  //   child: button(
+                  //     color: redColor,
+                  //     onPress: (){},
+                  //     textColor: whiteColor,
+                  //     title: 'Proceed to Shipping',
+                  //   ),
+                  // ),
                 ],
               ),
             );

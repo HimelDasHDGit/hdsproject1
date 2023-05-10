@@ -81,6 +81,7 @@ class CategoryDetails extends StatelessWidget {
                             ).box.white.roundedSM.
                             outerShadowSm.margin(const EdgeInsets.symmetric(horizontal: 4,vertical: 4)).
                             padding(const EdgeInsets.all(12)).make().onTap(() {
+                              controller.checkIfFav(data[index]);
                               Get.to(()=>  ItemDetails(
                                 title: "${data[index]['name']}",
                                 data: data[index],

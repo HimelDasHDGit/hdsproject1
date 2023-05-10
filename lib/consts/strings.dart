@@ -36,3 +36,6 @@ const video = "Video", reviews = "Reviews", sellerPolicy = "Seller Policy",
 
 //profile
 const wishList = "My wishlist", orders = "My Orders", messages = "Messages",oldpass='Old password',newpass='New password';
+
+//payment methods strings
+const paypal = "Paypal", stripe = "Stripe", cod = "Cash on Delivery";
