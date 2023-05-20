@@ -20,9 +20,28 @@ class FirestoreServices{
   }
 //get all chat messages
   static getChatMessages(docId){
-    return firestore.collection(chatsCollection)
-        .doc(docId).collection(messagesCollection).
-    orderBy('created_on',descending: false).snapshots();
+    return firestore
+        .collection(chatsCollection)
+        .doc(docId)
+        .collection(messagesCollection)
+        .orderBy('created_on',descending: false)
+        .snapshots();
   }
+//get all orders
+  static getAllOrders(){
+    return firestore.collection(ordersCollection).where('order_by',isEqualTo: currentUser!.uid).snapshots();
+  }
+//get wishlist
+  static getWishList(){
+    return firestore.collection(productsCollection).where('wishlist',arrayContains: currentUser!.uid).snapshots();
+  }
+//get all messages
+static getAllMessages(){
+  return firestore
+      .collection(chatsCollection)
+      .where('fromId',isEqualTo: currentUser!.uid)
+      .snapshots();
+}
+
 
 }

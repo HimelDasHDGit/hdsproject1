@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                 hintStyle: TextStyle(
                   color: textfieldGrey,
                 ),
-                suffixIcon: Icon(Icons.search,),
+                suffixIcon: Icon(Icons.search,color: redColor,),
               ),
             ),
           ),
@@ -101,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                   20.heightBox,
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     child: Row(
                       children: List.generate(3, (index) => Column(
                         children: [
@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                         10.heightBox,
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           child: Row(
                             children: List.generate(
                                 6, (index) => Column(
@@ -138,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                                 10.heightBox,
                                 "৳60000".text.color(redColor).fontFamily(bold).size(16).make(),
                               ],
-                            ).box.white.margin(EdgeInsets.symmetric(horizontal: 4))
+                            ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4))
                                 .roundedSM.padding(const EdgeInsets.all(8)).make(),
                             ),
                           ),
@@ -162,10 +162,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                   20.heightBox,
                   GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                       itemCount: 6,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                         mainAxisExtent: 300,
                         crossAxisSpacing: 8,
@@ -176,13 +176,13 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Image.asset(imgP5,width: 200,height:200, fit: BoxFit.cover,),
-                            Spacer(),
+                            const Spacer(),
                             "Laptop 32GB/64GB".text.fontFamily(semibold).color(darkFontGrey).make(),
                             10.heightBox,
                             "৳60000".text.color(redColor).fontFamily(bold).size(16).make(),
                           ],
-                        ).box.white.roundedSM.margin(EdgeInsets.symmetric(horizontal: 4)).
-                        padding(EdgeInsets.all(12)).make();
+                        ).box.white.roundedSM.margin(const EdgeInsets.symmetric(horizontal: 4)).
+                        padding(const EdgeInsets.all(12)).make();
                       },
                   ),
                 ],

@@ -4,6 +4,9 @@ import 'package:hdsproject1/consts/consts.dart';
 import 'package:hdsproject1/consts/lists.dart';
 import 'package:hdsproject1/services/firestore_services.dart';
 import 'package:hdsproject1/views/auth_screen/login_screen.dart';
+import 'package:hdsproject1/views/chat_screen/message_screen.dart';
+import 'package:hdsproject1/views/orders_screen/orders_screen.dart';
+import 'package:hdsproject1/views/wishlist_screen/wishlist_screen.dart';
 
 import '../../controllers/auth_controller.dart';
 import '../../controllers/profile_controller.dart';
@@ -99,17 +102,30 @@ class ProfileScreen extends StatelessWidget {
                           detailsCard(count: data['wishlist_count'],title: "Your orders",width: context.screenWidth/3.5),
                         ],
                       ),
+                      10.heightBox,
                       ListView.separated(
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index){
                           return ListTile(
+                            onTap: (){
+                              switch(index) {
+                                case 0:
+                                  Get.to(()=> OrdersScreen());
+                                  break;
+                                case 1: Get.to(()=> WishlistScreen());
+                                break;
+                                case 2: Get.to(()=>MessagesScreen());
+                                break;
+                              }
+
+                            },
                             title: profileButtonsList[index].text.fontFamily(semibold).color(darkFontGrey).make(),
                             leading: Image.asset(profileButtonIcon[index],width: 22,),
                           );
                         },
                         separatorBuilder: (context, index){
-                          return const Divider(color: lightGrey,);
+                          return const Divider(color: lightGrey,thickness: 2,);
                         },
                         itemCount: profileButtonsList.length,
                       ).box.white.rounded.margin(const EdgeInsets.all(12)).padding(const EdgeInsets.symmetric(horizontal: 16)).shadowSm.make().box.color(redColor).make(),

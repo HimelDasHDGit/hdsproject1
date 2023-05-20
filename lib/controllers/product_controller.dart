@@ -44,7 +44,7 @@ class ProductController extends GetxController {
     totalprice.value = price * quantity.value;
   }
 
-  addToCard({title, img, sellername, color, quantity, tprice, context}) async{
+  addToCard({title, img, sellername, color, quantity, tprice, context, venderID}) async{
     await firestore.collection(cartCollection).doc().set({
       'title': title,
       'img': img,
@@ -53,6 +53,7 @@ class ProductController extends GetxController {
       'qty': quantity,
       'tprice': tprice,
       'added_by': currentUser!.uid,
+      'vender_id':venderID
     }).catchError((error){
       VxToast.show(context, msg: error.toString());
     });

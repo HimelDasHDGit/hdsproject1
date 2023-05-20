@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hdsproject1/consts/colors.dart';
 import 'package:hdsproject1/consts/consts.dart';
-import 'package:hdsproject1/consts/images.dart';
 import 'package:hdsproject1/views/home_screen/home.dart';
 import 'package:hdsproject1/widgets_common/app_logo_widget.dart';
 
@@ -21,13 +18,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   changeScreen(){
 
-    Future.delayed(Duration(seconds: 3),(){
+    Future.delayed(const Duration(seconds: 3),(){
       //Get.to(()=> LoginScreen());
       auth.authStateChanges().listen((User? user) {
         if (user == null && mounted) {
           Get.to(()=> LoginScreen());
         }  else{
-          Get.to(()=>Home());
+          Get.to(()=>const Home());
         }
       });
     });
@@ -58,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
             appname.text.fontFamily(bold).size(30).white.make(),
             5.heightBox,
             appversion.text.white.make(),
-            Spacer(),
+            const Spacer(),
             credits.text.white.fontFamily(semibold).make(),
             30.heightBox,
           ],
