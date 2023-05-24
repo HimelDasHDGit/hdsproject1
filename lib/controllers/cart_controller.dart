@@ -23,7 +23,7 @@ class CartController extends GetxController{
   calculate(data){
     totalP.value = 0;
     for(var i = 0; i < data.length; i++){
-      totalP.value = totalP.value + int.parse(data[i]['tprice'].toString());
+      totalP.value = totalP.value + int.parse(data[i]['price'].toString());
     }
   }
 
@@ -31,7 +31,7 @@ class CartController extends GetxController{
     paymentIndex.value = index;
   }
 
-  placeMyOrder({required paymentMethod, required totalAmount})async {
+  placeMyOrder({required paymentMethod, required totalAmount, context})async {
 
     placingOrder(true);
 
@@ -41,6 +41,7 @@ class CartController extends GetxController{
       {
         'order_code' : "4545454",
         'order_by' : currentUser!.uid,
+        'order_date':FieldValue.serverTimestamp(),
         'order_by_name' : Get.find<HomeController>().username,
         'order_by_email' : currentUser!.email,
         'order_by_address' : addressController.text,
@@ -48,7 +49,7 @@ class CartController extends GetxController{
         'order_by_city' : cityController.text,
         'order_by_phone' : phoneController.text,
         'order_by_po' : poController.text,
-        'shipping_metrhod' : "Home Delivery",
+        'shipping_method' : "Home Delivery",
         'payment_method' : paymentMethod,
         'order_placed' : true,
         'order_confirmed' : false,
@@ -67,8 +68,8 @@ class CartController extends GetxController{
       products.add({
         'color' : productSnapshot[i]['color'],
         'img' : productSnapshot[i]['img'],
-        'qty' : productSnapshot[i]['qty'],
-        'vendor_id' : productSnapshot[i]['vendor_id'],
+        'qty' : productSnapshot[i]['quantity'],
+        'vender_id' : productSnapshot[i]['vender_id'],
         'price' : productSnapshot[i]['price'],
         'title' : productSnapshot[i]['title'],
       });

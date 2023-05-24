@@ -4,6 +4,7 @@ import 'package:hdsproject1/consts/consts.dart';
 
 import '../../services/firestore_services.dart';
 import '../../widgets_common/loading_indicator.dart';
+import 'orders_details.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class OrdersScreen extends StatelessWidget {
             var data = snapshot.data!.docs;
             
             return ListView.builder(
+              physics: const BouncingScrollPhysics(),
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index){
                 return ListTile(
@@ -35,8 +37,10 @@ class OrdersScreen extends StatelessWidget {
                   leading: "${index+1}.".text.fontFamily(bold).color(darkFontGrey).xl.make(),
                   title: data[index]['order_code'].toString().text.color(redColor).fontFamily(semibold).make(),
                   subtitle: data[index]['total_amount'].toString().numCurrency.text.fontFamily(bold).make(),
-                  trailing: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_rounded,color: darkFontGrey,)),
-                ).marginOnly(top: 1);
+                  trailing: IconButton(onPressed: (){
+                    Get.to(()=>  OrdersDetails(data:data[index]));
+                  }, icon: const Icon(Icons.arrow_forward_ios_rounded,color: darkFontGrey,)),
+                ).marginOnly(top: 2,bottom: 2,right: 5,left: 5);
               },
             );
             

@@ -50,8 +50,8 @@ class ProductController extends GetxController {
       'img': img,
       'sellername': sellername,
       'color': color,
-      'qty': quantity,
-      'tprice': tprice,
+      'quantity': quantity,
+      'price': tprice,
       'added_by': currentUser!.uid,
       'vender_id':venderID
     }).catchError((error){

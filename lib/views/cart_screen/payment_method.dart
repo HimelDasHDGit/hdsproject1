@@ -4,6 +4,7 @@ import 'package:hdsproject1/consts/lists.dart';
 import '../../controllers/cart_controller.dart';
 import '../../widgets_common/button.dart';
 import '../../widgets_common/loading_indicator.dart';
+import '../home_screen/home.dart';
 
 class PaymentMethods extends StatelessWidget {
   const PaymentMethods({Key? key}) : super(key: key);
@@ -21,13 +22,18 @@ class PaymentMethods extends StatelessWidget {
           child: controller.placingOrder.value? Center(
             child: loadingIndicator(),
           ):button(
-            onPress: (){
-              controller.placeMyOrder(
+            onPress: ()async {
+             await controller.placeMyOrder(
 
                 paymentMethod: paymentMethodsList[controller.paymentIndex.value],
                 totalAmount: controller.totalP.value,
 
               );
+
+             await controller.clearCart();
+             Get.offAll(const Home());
+             VxToast.show(context, msg: "Order placed successfully.");
+
             },
             title: "Place My Order",
             textColor: darkFontGrey,

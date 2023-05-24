@@ -8,7 +8,7 @@ Widget senderBubble(DocumentSnapshot data) {
   var time = intl.DateFormat("h:mma").format(t);
 
   return Directionality(
-    textDirection: data['uid'] == currentUser!.uid? TextDirection.rtl : TextDirection.ltr,
+    textDirection: data['uid'] == currentUser!.uid? TextDirection.ltr : TextDirection.ltr,
     child: Container(
       margin: EdgeInsets.only(bottom: 8),
       padding: EdgeInsets.all(12),

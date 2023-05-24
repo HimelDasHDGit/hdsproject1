@@ -37,7 +37,7 @@ class ChatsController extends GetxController{
         chatDocId = snapshot.docs.single.id;
       }  else{
         chats.add({
-          'createdOn': null,
+          'created_on': null,
           'last_msg': "",
           'users': {friendId: null, currentId: null,},
           'toId': '',

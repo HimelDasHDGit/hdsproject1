@@ -77,23 +77,21 @@ class ChatScreen extends StatelessWidget {
                   ),
                 )),
                 5.widthBox,
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: (){
-                    controller.sendMsg(controller.messagecontroller.text);
-                    controller.messagecontroller.clear();
-                  },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: whiteColor,
-                      side: BorderSide(
-                        color: lightGreen,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                ElevatedButton(
+                    onPressed: (){
+                  controller.sendMsg(controller.messagecontroller.text);
+                  controller.messagecontroller.clear();
+                },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: whiteColor,
+                    side: BorderSide(
+                      color: lightGreen,
                     ),
-                      child: "Send".text.color(lightGreen).make(),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
+                    child: "Send".text.color(lightGreen).make(),
                 ).box.roundedSM.height(80).make(),
               ],
             ).box.height(80).padding(const EdgeInsets.all(12)).margin(const EdgeInsets.only(bottom: 8)).make(),

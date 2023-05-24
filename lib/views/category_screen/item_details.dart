@@ -112,7 +112,7 @@ class ItemDetails extends StatelessWidget {
                               backgroundColor: Colors.white,
                               child: Icon(Icons.message_rounded,color: darkFontGrey,),
                             ).onTap(() {
-                              Get.to(()=> ChatScreen(),arguments: [data['seller'],data['vendor_id']]);
+                              Get.to(()=> ChatScreen(),arguments: [data['seller'],data['vender_id']]);
                             }),
                           ],
                         ).box.height(60).padding(const EdgeInsets.symmetric(horizontal: 16)).
@@ -254,7 +254,7 @@ class ItemDetails extends StatelessWidget {
                     quantity: controller.quantity.value,
                     tprice: controller.totalprice.value,
                     context: context,
-                    venderID: data['vendor_id']
+                    venderID: data['vender_id']
                   );
                   VxToast.show(context, msg: "Added to Cart");
                 },

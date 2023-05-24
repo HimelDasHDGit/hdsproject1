@@ -24,7 +24,6 @@ class HomeController extends GetxController{
     );
 
     username = n;
-    print(username.toString());
 
   }
 

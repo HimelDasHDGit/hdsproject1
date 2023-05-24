@@ -72,10 +72,10 @@ class ProfileScreen extends StatelessWidget {
                             10.widthBox,
                             Expanded(
                                 child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                "${data['name']}".text.fontFamily(semibold).white.make(),
-                                "${data['email']}".text.white.make(),
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                 "${data['name']}".text.fontFamily(semibold).white.make(),
+                                 "${data['email']}".text.white.make(),
                               ],
                             )),
                             5.widthBox,

@@ -61,8 +61,8 @@ class CartScreen extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index){
                             return ListTile(
                               leading: Image.network("${data[index]['img']}",fit: BoxFit.cover,).box.size(100, 100).make(),
-                              title: "${data[index]['title']} -${data[index]['qty']}x".text.fontFamily(semibold).size(16).make(),
-                              subtitle: "${data[index]['tprice']}".numCurrency.text.fontFamily(semibold).color(redColor).make(),
+                              title: "${data[index]['title']} -${data[index]['quantity']}x".text.fontFamily(semibold).size(16).make(),
+                              subtitle: "${data[index]['price']}".numCurrency.text.fontFamily(semibold).color(redColor).make(),
                               trailing: const Icon(Icons.delete,color: redColor,).onTap(() {
                                 FirestoreServices.deleteDocument(data[index].id);
                               }),
@@ -78,15 +78,6 @@ class CartScreen extends StatelessWidget {
                     ],
                   ).box.padding(const EdgeInsets.all(12)).width(context.screenWidth - 60,).color(lightGolden).roundedSM.make(),
                   10.heightBox,
-                  // SizedBox(
-                  //   width: context.screenWidth - 60,
-                  //   child: button(
-                  //     color: redColor,
-                  //     onPress: (){},
-                  //     textColor: whiteColor,
-                  //     title: 'Proceed to Shipping',
-                  //   ),
-                  // ),
                 ],
               ),
             );
