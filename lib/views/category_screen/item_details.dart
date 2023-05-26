@@ -121,32 +121,36 @@ class ItemDetails extends StatelessWidget {
                         Obx(()=>Column(
                             children: [
                               //color
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 100,
-                                    child: "Color".text.color(textfieldGrey).make(),
-                                  ),
-                                  Row(
-                                    children: List.generate(
-                                      data['colors'].length,
-                                          (index) =>
-                                             Stack(
-                                               alignment: Alignment.center,
-                                               children: [
-                                                 VxBox().size(40, 40).roundedFull.color(Color(data['colors'][index]).withOpacity(1.0)).margin(const EdgeInsets.symmetric(horizontal: 4)).make().onTap(() {
-                                                   controller.changeColorIndex(index);
-                                                 }),
-                                                 Visibility(
-                                                   visible: index == controller.colorIndex.value,
-                                                     child: const Icon(Icons.done,color: Colors.white,),
-                                                 ),
-                                               ],
-                                             ),
+                              SingleChildScrollView(
+                                physics: const BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 100,
+                                      child: "Color".text.color(textfieldGrey).make(),
                                     ),
-                                  ),
-                                ],
-                              ).box.padding(const EdgeInsets.all(8)).make(),
+                                    Row(
+                                      children: List.generate(
+                                        data['colors'].length,
+                                            (index) =>
+                                               Stack(
+                                                 alignment: Alignment.center,
+                                                 children: [
+                                                   VxBox().size(40, 40).roundedFull.color(Color(data['colors'][index]).withOpacity(1.0)).margin(const EdgeInsets.symmetric(horizontal: 4)).make().onTap(() {
+                                                     controller.changeColorIndex(index);
+                                                   }),
+                                                   Visibility(
+                                                     visible: index == controller.colorIndex.value,
+                                                       child: const Icon(Icons.done,color: Colors.white,),
+                                                   ),
+                                                 ],
+                                               ),
+                                      ),
+                                    ),
+                                  ],
+                                ).box.padding(const EdgeInsets.all(8)).make(),
+                              ),
                               //quantity
                               Row(
                                 children: [
@@ -246,17 +250,21 @@ class ItemDetails extends StatelessWidget {
               child: button(
                 color: redColor,
                 onPress: (){
-                  controller.addToCard(
-                    color: data['colors'][controller.colorIndex.value],
-                    title: data['name'],
-                    img: data['images'][0],
-                    sellername: data['seller'],
-                    quantity: controller.quantity.value,
-                    tprice: controller.totalprice.value,
-                    context: context,
-                    venderID: data['vender_id']
-                  );
-                  VxToast.show(context, msg: "Added to Cart");
+                  if (controller.quantity.value>0) {
+                    controller.addToCard(
+                        color: data['colors'][controller.colorIndex.value],
+                        title: data['name'],
+                        img: data['images'][0],
+                        sellername: data['seller'],
+                        quantity: controller.quantity.value,
+                        tprice: controller.totalprice.value,
+                        context: context,
+                        venderID: data['vender_id']
+                    );
+                    VxToast.show(context, msg: "Added to Cart");
+                  }  else{
+                    VxToast.show(context, msg: "কমপক্ষে একটি যুক্ত করুন");
+                  }
                 },
                 textColor: whiteColor,
                 title: "Add to cart",

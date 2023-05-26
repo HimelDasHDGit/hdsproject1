@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:hdsproject1/consts/consts.dart';
 import 'package:hdsproject1/views/orders_screen/components/order_status.dart';
 import 'package:intl/intl.dart'as intl;
@@ -9,6 +10,7 @@ class OrdersDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Colors.lightGreen.value);
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
@@ -42,9 +44,28 @@ class OrdersDetails extends StatelessWidget {
                             children: [
                               "Shipping Address".text.fontFamily(semibold).make(),
                               "${data['order_by_name']}".text.color(redColor).fontFamily(semibold).make(),
-                              "${data['order_by_email']}".text.color(redColor).fontFamily(semibold).make(),
+                              SizedBox(
+                                width: 200,
+                                child: Flex(
+                                    direction: Axis.horizontal,
+                                  children: [Expanded(
+                                      flex: 2,
+                                      child: "${data['order_by_email']}".text.color(redColor).fontFamily(semibold).make()),]
+                                ),
+                              ),
                               "${data['order_by_phone']}".text.color(redColor).fontFamily(semibold).make(),
-                              "${data['order_by_address']}".text.color(redColor).fontFamily(semibold).make(),
+                              SizedBox(
+                                width: 200,
+                                child: Flex(
+                                  direction: Axis.horizontal,
+                                  children: [
+                                    Expanded(
+                                        child: "${data['order_by_address']}".text.color(redColor).fontFamily(semibold).make(),
+                                      flex: 2,
+                                    ),
+                                  ],
+                                ),
+                              ),
                               "${data['order_by_po']}".text.color(redColor).fontFamily(semibold).make(),
                               "${data['order_by_city']}".text.color(redColor).fontFamily(semibold).make(),
                               "${data['order_by_state']}".text.color(redColor).fontFamily(semibold).make(),
@@ -65,8 +86,40 @@ class OrdersDetails extends StatelessWidget {
                       ),
                     ),
                   ],
-                ).box.outerShadow.white.make(),
-                const Divider(color: redColor, thickness: 1,indent: 10,endIndent: 10,),
+                ).box.outerShadow3Xl.white.make(),
+                //const Divider(color: redColor, thickness: 1,indent: 10,endIndent: 10,),
+                10.heightBox,
+                "Ordered prodcut".text.size(16).color(darkFontGrey).fontFamily(semibold).makeCentered(),
+                10.heightBox,
+                ListView(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  children: List.generate(
+                      data['orders'].length,
+                          (index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          orderPlaceddetails(
+                            d1: "${data['orders'][index]['qty']} x",
+                            d2: "Refundable",
+                            title1: data['orders'][index]['title'],
+                            title2: "${data['orders'][index]['price']}".numCurrency,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 5),
+                            child: Container(
+                              width: 30,
+                              height: 10,
+                              color: Color(data['orders'][index]['color']),
+                            ),
+                          ),
+                          Divider(),
+                        ],
+                      );
+                    }).toList(),
+                ).box.outerShadow3Xl.white.make(),
+                20.heightBox,
               ],
             ),
           ],
