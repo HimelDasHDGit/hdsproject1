@@ -72,7 +72,7 @@ class CategoryDetails extends StatelessWidget {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.network(data[index]['images'][1],width: 200,height: 150, fit: BoxFit.cover,),
+                                Image.network(data[index]['images'][0],width: 200,height: 150, fit: BoxFit.cover,),
                                 10.heightBox,
                                 "${data[index]['name']}".text.fontFamily(semibold).color(darkFontGrey).make(),
                                 10.heightBox,

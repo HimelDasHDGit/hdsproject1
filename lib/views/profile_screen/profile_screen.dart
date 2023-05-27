@@ -7,6 +7,7 @@ import 'package:hdsproject1/views/auth_screen/login_screen.dart';
 import 'package:hdsproject1/views/chat_screen/message_screen.dart';
 import 'package:hdsproject1/views/orders_screen/orders_screen.dart';
 import 'package:hdsproject1/views/wishlist_screen/wishlist_screen.dart';
+import 'package:hdsproject1/widgets_common/loading_indicator.dart';
 
 import '../../controllers/auth_controller.dart';
 import '../../controllers/profile_controller.dart';
@@ -15,12 +16,14 @@ import 'components/details_card.dart';
 import 'editprofile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-   ProfileScreen({Key? key}) : super(key: key);
+   const ProfileScreen({Key? key}) : super(key: key);
 
-  final controller = Get.put(ProfileController());
+
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProfileController());
+
     return bgWidget(
       child: Scaffold(
         body: StreamBuilder(
@@ -38,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
 
              return SafeArea(
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
                       Padding(
@@ -94,13 +97,25 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       5.heightBox,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          detailsCard(count: data['cart_count'],title: "Your cart",width: context.screenWidth/3.5),
-                          detailsCard(count: data['oredr_count'],title: "Your wishlist",width: context.screenWidth/3.5),
-                          detailsCard(count: data['wishlist_count'],title: "Your orders",width: context.screenWidth/3.5),
-                        ],
+                      FutureBuilder(
+                        future: FirestoreServices.getCounts(),
+                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                          if (!snapshot.hasData) {
+                            return Center(child: loadingIndicator());
+                          }  else{
+
+                            var countData = snapshot.data;
+
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                detailsCard(count: countData[0].toString(),title: "Your cart",width: context.screenWidth/3.5),
+                                detailsCard(count: countData[1].toString(),title: "Your wishlist",width: context.screenWidth/3.5),
+                                detailsCard(count: countData[2].toString(),title: "Your orders",width: context.screenWidth/3.5),
+                              ],
+                            );
+                          }
+                        }
                       ),
                       10.heightBox,
                       ListView.separated(
@@ -111,11 +126,11 @@ class ProfileScreen extends StatelessWidget {
                             onTap: (){
                               switch(index) {
                                 case 0:
-                                  Get.to(()=> OrdersScreen());
+                                  Get.to(()=> const OrdersScreen());
                                   break;
-                                case 1: Get.to(()=> WishlistScreen());
+                                case 1: Get.to(()=> const WishlistScreen());
                                 break;
-                                case 2: Get.to(()=>MessagesScreen());
+                                case 2: Get.to(()=>const MessagesScreen());
                                 break;
                               }
 

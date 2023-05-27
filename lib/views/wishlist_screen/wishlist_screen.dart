@@ -21,7 +21,29 @@ class WishlistScreen extends StatelessWidget {
             } else if(snapshot.data!.docs.isEmpty){
               return 'No wishlit to show!'.text.color(darkFontGrey).makeCentered();
             }else{
-              return Container();
+              var data = snapshot.data!.docs;
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context,int index){
+                        return ListTile(
+                          leading: Image.network("${data[index]['images'][0]}",fit: BoxFit.cover,).box.size(100,100).make(),
+                          title: "${data[index]['name']}".text.fontFamily(semibold).size(16).make(),
+                          subtitle: "${data[index]['price']}".numCurrency.text.fontFamily(semibold).color(redColor).make(),
+                          trailing: const Icon(Icons.favorite,color: redColor,).onTap(() {
+                            firestore.collection(productsCollection).doc(data[index].id).set({
+                              'wishlist':FieldValue.arrayRemove([currentUser!.uid])
+                            }, SetOptions(merge: true));
+                          }),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
             }
           }
       ),

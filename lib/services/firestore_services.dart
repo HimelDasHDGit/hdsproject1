@@ -42,6 +42,26 @@ static getAllMessages(){
       .where('fromId',isEqualTo: currentUser!.uid)
       .snapshots();
 }
+//get counts
+static getCounts()async {
+    var res = await Future.wait([
+      firestore.collection(cartCollection).where('added_by',isEqualTo: currentUser!.uid).get().then((value) {
+        return value.docs.length;
+      }),
+      firestore.collection(productsCollection).where('wishlist',arrayContains: currentUser!.uid).get().then((value) {
+        return value.docs.length;
+      }),
+      firestore.collection(ordersCollection).where('order_by',isEqualTo: currentUser!.uid).get().then((value) {
+        return value.docs.length;
+      })
+    ]);
+    return res;
+
+}
+//get all products
+static allProducts(){
+  return firestore.collection(productsCollection).snapshots();
+}
 
 
 }
