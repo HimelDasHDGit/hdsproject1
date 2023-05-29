@@ -21,21 +21,49 @@ const termAndCond = "Terms and conditions";
 const alreadyHaveAcc = "Already have an account? ";
 const home = "home", categories = "Categories", cart = "Cart", account = "Account";
 const searchAnything = "Search anything...", todayDeal = "Today's Deal", flashSale = "Falash Sale",
-topSellers = "Top Sellers", brand = "Brand", topCategories = "Top Categories",
-    featureCategories = "Featured Categories", mobilePhone = "Mobile Phone", boysGlasses = "Boys Glasses",
-    womenDress = "Women Dress",girlsWatches = "Girls Watches", tshirts = "T-shirts", girlsDress = "Girls Dress",
+
+    topSellers = "Top Sellers",
+    brand = "Brand",
+    topCategories = "Top Categories",
+
+featureCategories = "Featured Categories",
+mobilePhone = "Mobile Phone",
+boysGlasses = "Boys Glasses",
+
+    womenDress = "Women Dress",
+    girlsWatches = "Girls Watches",
+    tshirts = "T-shirts",
+    girlsDress = "Girls Dress",
+
 featuredProduct = "Featured Product";
+
 //categories
-const construction = "Women Dress", menClothingFashion = "Men Clothing & Fashion",
-    compAccess = "Computer & Accessories", autoMobile = "Automobile", kidToys = "Kid's Toys", sports = "Stports Accessories",
-jewelery = "Jewelery", cellphone = "Cellphone & Tab", furniture = "Furniture";
+const construction = "Women Dress",
+    menClothingFashion = "Men Clothing & Fashion",
+    compAccess = "Computer & Accessories",
+    autoMobile = "Automobile",
+    kidToys = "Kid's Toys",
+    sports = "Stports Accessories",
+    jewelery = "Jewelery",
+    cellphone = "Cellphone & Tab",
+    furniture = "Furniture";
 
 //item details
-const video = "Video", reviews = "Reviews", sellerPolicy = "Seller Policy",
-    supportPolicy = "Support Policy", returnPolicy = "Return Policy", productsYouLike = "Products You Like";
+const video = "Video",
+    reviews = "Reviews",
+    sellerPolicy = "Seller Policy",
+    supportPolicy = "Support Policy",
+    returnPolicy = "Return Policy",
+    productsYouLike = "Products You Like";
 
 //profile
-const wishList = "My wishlist", orders = "My Orders", messages = "Messages",oldpass='Old password',newpass='New password';
+const wishList = "My wishlist",
+    orders = "My Orders",
+    messages = "Messages",
+    oldpass='Old password',
+    newpass='New password';
 
 //payment methods strings
-const paypal = "Paypal", stripe = "Stripe", cod = "Cash on Delivery";
+const paypal = "Paypal",
+    stripe = "Stripe",
+    cod = "Cash on Delivery";

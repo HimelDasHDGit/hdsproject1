@@ -3,9 +3,12 @@ import 'package:get/get.dart';
 import 'package:hdsproject1/consts/consts.dart';
 import 'package:hdsproject1/services/firestore_services.dart';
 import 'package:hdsproject1/views/category_screen/item_details.dart';
+import 'package:hdsproject1/views/home_screen/search_screen.dart';
+import 'package:hdsproject1/widgets_common/app_logo_widget.dart';
 import 'package:hdsproject1/widgets_common/loading_indicator.dart';
 
 import '../../consts/lists.dart';
+import '../../controllers/home_controller.dart';
 import '../../widgets_common/bg_widget.dart';
 import '../../widgets_common/homebuttons.dart';
 import 'components/featured_button.dart';
@@ -15,6 +18,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var controller = Get.find<HomeController>();
+
     return bgWidget(
       child: Container(
         color: Colors.transparent,
@@ -34,7 +40,8 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: TextFormField(
-                  decoration: const InputDecoration(
+                  controller: controller.searchController,
+                  decoration:  InputDecoration(
                     filled: true,
                     disabledBorder: InputBorder.none,
                     fillColor: Colors.transparent,
@@ -42,7 +49,11 @@ class HomeScreen extends StatelessWidget {
                     hintStyle: TextStyle(
                       color: textfieldGrey,
                     ),
-                    suffixIcon: Icon(Icons.search,color: redColor,),
+                    suffixIcon: Icon(Icons.search,color: redColor,).onTap(() {
+                      if (controller.searchController.text.isNotEmptyAndNotNull) {
+                        Get.to(()=> SearchScreen(title: controller.searchController.text,));
+                      }
+                    }),
                   ),
                 ),
               ),
@@ -112,6 +123,7 @@ class HomeScreen extends StatelessWidget {
                       child: featureCategories.text.color(darkFontGrey).size(18).fontFamily(semibold).make(),
                     ),
                     20.heightBox,
+                    //featured categories
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       physics: const BouncingScrollPhysics(),
@@ -126,6 +138,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     20.heightBox,
+                    //featured products
                     Container(
                       width: double.infinity,
                       decoration: const BoxDecoration(
@@ -140,24 +153,55 @@ class HomeScreen extends StatelessWidget {
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             physics: const BouncingScrollPhysics(),
-                            child: StreamBuilder(
-                              stream: null,
-                              builder: (context, snapshot) {
-                                return Row(
-                                  children: List.generate(
-                                      6, (index) => Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Image.asset(imgP1,width: 150,fit: BoxFit.cover,),
-                                      10.heightBox,
-                                      "Laptop 32GB/64GB".text.fontFamily(semibold).color(darkFontGrey).make(),
-                                      10.heightBox,
-                                      "৳60000".text.color(redColor).fontFamily(bold).size(16).make(),
-                                    ],
-                                  ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4))
-                                      .roundedSM.padding(const EdgeInsets.all(8)).make(),
-                                  ),
-                                );
+                            child: FutureBuilder(
+                              future: FirestoreServices.getFeaturedProducts(),
+                              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot>snapshot) {
+                                if (!snapshot.hasData) {
+                                  return Center(child: loadingIndicator(),);
+                                }  else if(snapshot.data!.docs.isEmpty){
+                                  return Card(
+                                    elevation: 20,
+                                    clipBehavior: Clip.hardEdge,
+                                    child: bgWidget(
+                                        child:  Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SizedBox(
+                                            height: 130,
+                                            child: Column(
+                                              children: [
+                                                // SizedBox(height: 80,),
+                                                applogoWidget(),
+                                                Center(child: "No featured product availble at tis time!".text.color(darkFontGrey).makeCentered(),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                    ),
+                                  );
+                                }else{
+
+                                  var featuredData = snapshot.data!.docs;
+
+                                  return Row(
+                                    children: List.generate(
+                                      featuredData.length,
+                                          (index) => Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Image.network(featuredData[index]['images'][0],width: 150,height: 130,fit: BoxFit.cover,),
+                                        10.heightBox,
+                                        "${featuredData[index]['name']}".text.fontFamily(semibold).color(darkFontGrey).make(),
+                                        10.heightBox,
+                                        "${featuredData[index]['price']}".numCurrency.text.color(redColor).fontFamily(bold).size(16).make(),
+                                      ],
+                                    ).box.white.margin(const EdgeInsets.symmetric(horizontal: 4))
+                                        .roundedSM.padding(const EdgeInsets.all(8)).make().onTap(() {
+                                            Get.to(()=> ItemDetails(title: "${featuredData[index]['name']}",data: featuredData[index],));
+                                          }),
+                                    ),
+                                  );
+                                }
                               }
                             ),
                           ),

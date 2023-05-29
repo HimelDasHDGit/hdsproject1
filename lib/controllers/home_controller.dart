@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:hdsproject1/consts/firebase_const.dart';
 
+import '../consts/consts.dart';
+
 class HomeController extends GetxController{
 
   @override
@@ -13,6 +15,8 @@ class HomeController extends GetxController{
   var currentNavIndex = 0.obs;
 
   var username = '';
+
+  var searchController = TextEditingController();
 
   getUsername()  async{
     var n = await firestore.collection(usersCollection).where('id',isEqualTo: currentUser!.uid).get().

@@ -9,8 +9,8 @@ const secondsliderlist = [imgSs1, imgSs2, imgSs3, imgSs4,];
 const featuredImages1 = [imgSs1,imgSs2,imgSs3];
 const featuredImages2 = [imgS4,imgS5,imgS6];
 
-const featuredTitle1 = [womenDress,girlsDress,girlsWatches];
-const featuredTitle2 = [boysGlasses,mobilePhone,tshirts];
+const featuredTitle1 = [womenDress,autoMobile,menClothingFashion];
+const featuredTitle2 = [compAccess,mobilePhone,tshirts];
 
 //category_list
 const categoryList = [

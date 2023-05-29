@@ -62,6 +62,13 @@ static getCounts()async {
 static allProducts(){
   return firestore.collection(productsCollection).snapshots();
 }
-
+//get featured products
+static getFeaturedProducts(){
+    return firestore.collection(productsCollection).where('is_featured', isEqualTo: true).get();
+}
+//search products
+static searchProducts (title){
+    return firestore.collection(productsCollection).where('category',isLessThanOrEqualTo: title).get();
+}
 
 }
