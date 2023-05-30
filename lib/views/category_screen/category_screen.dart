@@ -5,6 +5,7 @@ import 'package:hdsproject1/consts/lists.dart';
 import 'package:hdsproject1/controllers/product_controller.dart';
 import 'package:hdsproject1/widgets_common/bg_widget.dart';
 
+import '../../widgets_common/app_logo_widget.dart';
 import 'category_details.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -20,6 +21,16 @@ class CategoryScreen extends StatelessWidget {
         appBar: AppBar(
           title: categories.text.fontFamily(bold).white.make(),
           automaticallyImplyLeading: false,
+          actions: [
+            SizedBox(
+                height: 30,
+                width: 55,
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: applogoWidget(),
+                )
+            )
+          ],
         ),
         body: Container(
           padding: EdgeInsets.all(12),

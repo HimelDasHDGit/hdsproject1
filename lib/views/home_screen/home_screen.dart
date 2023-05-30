@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var controller = Get.find<HomeController>();
+    var controller = Get.put<HomeController>(HomeController());
 
     return bgWidget(
       child: Container(
@@ -49,11 +49,14 @@ class HomeScreen extends StatelessWidget {
                     hintStyle: TextStyle(
                       color: textfieldGrey,
                     ),
-                    suffixIcon: Icon(Icons.search,color: redColor,).onTap(() {
-                      if (controller.searchController.text.isNotEmptyAndNotNull) {
-                        Get.to(()=> SearchScreen(title: controller.searchController.text,));
-                      }
-                    }),
+                    suffixIcon: CircleAvatar(
+                      backgroundColor: redColor.withOpacity(.09),
+                      child: Icon(Icons.search,color: redColor,).onTap(() {
+                        if (controller.searchController.text.isNotEmptyAndNotNull) {
+                          Get.to(()=> SearchScreen(title: controller.searchController.text,));
+                        }
+                      }),
+                    ),
                   ),
                 ),
               ),

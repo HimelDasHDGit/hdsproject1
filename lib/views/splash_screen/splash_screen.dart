@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
               20.heightBox,
               applogoWidget(),
               10.heightBox,
-              appname.text.fontFamily(bold).size(30).white.make(),
+              appname.text.fontFamily(bold).size(30).color(redColor).make(),
               5.heightBox,
               appversion.text.white.make(),
               const Spacer(),

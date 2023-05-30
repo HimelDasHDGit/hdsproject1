@@ -68,7 +68,11 @@ static getFeaturedProducts(){
 }
 //search products
 static searchProducts (title){
-    return firestore.collection(productsCollection).where('category',isLessThanOrEqualTo: title).get();
+    return firestore.collection(productsCollection).get();
+}
+//get sub categories
+static getSubCategories(title){
+  return firestore.collection(productsCollection).where('subcategory',isEqualTo: title).snapshots();
 }
 
 }
